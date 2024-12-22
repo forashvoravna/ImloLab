@@ -1,6 +1,5 @@
 package uzb.lab.imlolab.payload;
 
-
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,9 +12,6 @@ import org.springframework.data.web.ProjectedPayload;
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @ProjectedPayload
-public class WordsPayload {
-    String word;
-    String description;
-    String wordLotin;
-    String descriptionLotin;
+public class TextPayload {
+    String text;
 }

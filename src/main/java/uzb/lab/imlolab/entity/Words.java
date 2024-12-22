@@ -1,27 +1,34 @@
 package uzb.lab.imlolab.entity;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+@Data
+@Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Entity
+@Builder
+@JsonInclude(value = JsonInclude.Include.NON_EMPTY, content = JsonInclude.Include.NON_NULL)
 public class Words {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     @Id
-    Integer id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    Long id;
+
     @Column(nullable = false)
     String word;
+
     @Column(nullable = false)
     String description;
-    @Column(nullable = false)
-    String word_lotin;
-    @Column(nullable = false)
-    String description_lotin;
 
+    @Column(name = "word_lotin", nullable = false)
+    String wordLotin;
+
+    @Column(name = "description_lotin", nullable = false)
+    String descriptionLotin;
 
 
 }
