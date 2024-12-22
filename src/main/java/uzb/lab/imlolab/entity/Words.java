@@ -17,10 +17,10 @@ public class Words {
     String word;
     @Column(nullable = false)
     String description;
-    @Column(nullable = false)
-    String word_lotin;
-    @Column(nullable = false)
-    String description_lotin;
+    @Column(nullable = false, name = "word_lotin")
+    String wordLotin;
+    @Column(nullable = false, name = "description_lotin")
+    String descriptionLotin;
 
 
 

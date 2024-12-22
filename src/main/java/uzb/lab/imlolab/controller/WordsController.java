@@ -2,11 +2,10 @@ package uzb.lab.imlolab.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import uzb.lab.imlolab.service.WordsService;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @RequestMapping("/api/words")
@@ -19,5 +18,10 @@ public class WordsController {
     @GetMapping("/getAll")
     public ResponseEntity<?> getALlWords(){
         return ResponseEntity.status(200).body(wordsService.getAllWords());
+    }
+
+    @GetMapping("/incorrect")
+    public List<String> getIncorrect(@RequestParam String text){
+        return wordsService.findIncorrectWords(text);
     }
 }
