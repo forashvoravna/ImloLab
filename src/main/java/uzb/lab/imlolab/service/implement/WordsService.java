@@ -25,6 +25,39 @@ public class WordsService implements IWordsService {
     private final ResultDTO resultDTO = new ResultDTO();
 
 
+    public ResponseEntity<ResultDTO> updateWordLotin() {
+
+        int[] a = {4733, 6409, 6584, 6588, 6590, 6745, 6747, 6749, 6752, 19682, 19960, 19962, 19964, 19980, 22423, 28848, 76133, 19974};
+
+
+
+        for (int i = 0; i < a.length; i++) {
+            String temp = "";
+            Words words = wordsRepository.findWordsById((long) a[i]);
+            temp = words.getWordLotin().replaceAll(" va", "");
+            words.setWordLotin(temp);
+            temp = words.getDescription().replaceAll(" va", "");
+            words.setDescriptionLotin(temp);
+            temp = words.getWord().replaceAll(" ва", "");
+            words.setWord(temp);
+            temp = words.getDescription().replaceAll(" ва", "");
+            words.setDescription(temp);
+//            temp = words.getWordLotin();
+//            temp = temp.replaceAll("o'", "o‘").replaceAll("g'", "g‘");
+//            temp = temp.replaceAll("'", "’");
+//            if(temp.endsWith("a va")){
+//                temp = temp.replaceAll("a va", "");
+//            }
+
+//            words.setWordLotin(temp);
+            wordsRepository.save(words);
+
+        }
+
+        return null;
+    }
+
+
     @Override
     public ResponseEntity<ResultDTO> checkTextForWords(TextPayload textPayload) {
         System.out.println("asdasdasd");

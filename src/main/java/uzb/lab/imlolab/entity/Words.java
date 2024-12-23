@@ -2,6 +2,7 @@ package uzb.lab.imlolab.entity;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -18,17 +19,18 @@ public class Words {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    @Column(nullable = false)
+    @NotBlank(message = "word field must not be blank")
+    @Column(nullable = false, unique = true, name = "word")
     String word;
 
     @Column(nullable = false)
     String description;
 
-    @Column(name = "word_lotin", nullable = false)
+    @NotBlank(message = "word_lotin field must not be blank")
+    @Column(nullable = false, unique = true, name = "word_lotin")
     String wordLotin;
 
     @Column(name = "description_lotin", nullable = false)
     String descriptionLotin;
-
 
 }

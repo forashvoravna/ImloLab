@@ -12,19 +12,20 @@ public class CleaningWords {
 
     public static String textFilter(String text) {
 
-        `
-        '
-            ´
-        ʹ
-                ʻ
-        ʼ
-                ʽ
-        ʾ
-                ʿ
-        ˈ
-                ˊ
-        ˋ
- ̍ ՙ ՚՛՝
+//        `
+//        '
+//            ´
+//        ʹ
+//                ʻ
+//        ʼ
+//                ʽ
+//        ʾ
+//                ʿ
+//        ˈ
+//                ˊ
+//        ˋ
+// ̍ ՙ ՚՛՝
+//        '
 
         text = text.toLowerCase().replaceAll("\n", " ").trim();
         text = text.replaceAll("[^a-zA-Zа-яА-ЯёЁ'ʻ ]", " ").trim();

@@ -17,6 +17,14 @@ public class WordsController {
 
     private final WordsService wordsService;
 
+
+    @PostMapping("/test/")
+    public void test() {
+        wordsService.updateWordLotin();
+    }
+
+
+
     @PostMapping("/check-text/")
     public ResponseEntity<ResultDTO> checkTextForWords(@RequestBody TextPayload textPayload) {
         System.out.println("asdasd");
