@@ -1,27 +1,36 @@
 package uzb.lab.imlolab.entity;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+@Data
+@Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Entity
+@Builder
+@JsonInclude(value = JsonInclude.Include.NON_EMPTY, content = JsonInclude.Include.NON_NULL)
 public class Words {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     @Id
-    Integer id;
-    @Column(nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    Long id;
+
+    @NotBlank(message = "word field must not be blank")
+    @Column(nullable = false, unique = true, name = "word")
     String word;
+
     @Column(nullable = false)
     String description;
-    @Column(nullable = false, name = "word_lotin")
+
+    @NotBlank(message = "word_lotin field must not be blank")
+    @Column(nullable = false, unique = true, name = "word_lotin")
     String wordLotin;
-    @Column(nullable = false, name = "description_lotin")
+
+    @Column(name = "description_lotin", nullable = false)
     String descriptionLotin;
-
-
 
 }
