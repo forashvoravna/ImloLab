@@ -14,8 +14,9 @@
     <artifactId>ImloLaboratory</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>ImloLaboratory</name>
-
     <description>ImloLaboratory</description>
+    <name>ImloLab</name>
+    <description>ImloLab</description>
 
     <properties>
         <java.version>23</java.version>
@@ -27,7 +28,7 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
-                <version>3.4.0</version>
+                <version>3.3.4</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

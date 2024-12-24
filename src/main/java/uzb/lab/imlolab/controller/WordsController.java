@@ -67,4 +67,3 @@ public class WordsController {
         return wordsService.deleteByWord(word);
     }
 
-}
