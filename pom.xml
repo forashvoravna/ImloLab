@@ -11,11 +11,11 @@
     </parent>
 
     <groupId>uzb.lab</groupId>
-    <artifactId>ImloLab</artifactId>
+    <artifactId>ImloLaboratory</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>ImloLab</name>
+    <name>ImloLaboratory</name>
 
-    <description>ImloLab</description>
+    <description>ImloLaboratory</description>
 
     <properties>
         <java.version>23</java.version>
