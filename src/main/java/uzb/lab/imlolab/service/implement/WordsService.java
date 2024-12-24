@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import uzb.lab.imlolab.dto.ResultDTO;
+import uzb.lab.imlolab.dto.WordsDTO;
 import uzb.lab.imlolab.entity.Words;
 import uzb.lab.imlolab.exception.ItemNotFoundException;
 import uzb.lab.imlolab.payload.TextPayload;
@@ -14,6 +15,10 @@ import uzb.lab.imlolab.repository.WordsRepository;
 import uzb.lab.imlolab.service.IWordsService;
 import uzb.lab.imlolab.util.AlphabetRecognition;
 import uzb.lab.imlolab.util.CleaningWords;
+import uzb.lab.imlolab.util.RemoveDuplicates;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Slf4j
 @Service
@@ -21,53 +26,32 @@ import uzb.lab.imlolab.util.CleaningWords;
 public class WordsService implements IWordsService {
 
     private final WordsRepository wordsRepository;
-
     private final ResultDTO resultDTO = new ResultDTO();
-
-
-    public ResponseEntity<ResultDTO> updateWordLotin() {
-
-        int[] a = {4733, 6409, 6584, 6588, 6590, 6745, 6747, 6749, 6752, 19682, 19960, 19962, 19964, 19980, 22423, 28848, 76133, 19974};
-
-
-
-        for (int i = 0; i < a.length; i++) {
-            String temp = "";
-            Words words = wordsRepository.findWordsById((long) a[i]);
-            temp = words.getWordLotin().replaceAll(" va", "");
-            words.setWordLotin(temp);
-            temp = words.getDescription().replaceAll(" va", "");
-            words.setDescriptionLotin(temp);
-            temp = words.getWord().replaceAll(" ва", "");
-            words.setWord(temp);
-            temp = words.getDescription().replaceAll(" ва", "");
-            words.setDescription(temp);
-//            temp = words.getWordLotin();
-//            temp = temp.replaceAll("o'", "o‘").replaceAll("g'", "g‘");
-//            temp = temp.replaceAll("'", "’");
-//            if(temp.endsWith("a va")){
-//                temp = temp.replaceAll("a va", "");
-//            }
-
-//            words.setWordLotin(temp);
-            wordsRepository.save(words);
-
-        }
-
-        return null;
-    }
 
 
     @Override
     public ResponseEntity<ResultDTO> checkTextForWords(TextPayload textPayload) {
-        System.out.println("asdasdasd");
+        List<WordsDTO> wordsDTOList = new ArrayList<>();
         String text = textPayload.getText();
-
         String s = CleaningWords.textFilter(text);
-        System.out.println("text => " + s);
-        return null;
-    }
+        String[] arrString = s.split(" ");
+        String[] textArray = RemoveDuplicates.remove(arrString);
+        for (int i = 0; i < textArray.length; i++) {
+            String temp = textArray[i].trim();
+            WordsDTO wordsDTO = new WordsDTO();
+            if (wordsRepository.existsByWordLotin(temp)) {
+                System.out.println(i + " successful => " + temp);
+                wordsDTO.successful(temp);
+                wordsDTOList.add(wordsDTO);
+            } else {
+                System.out.println(i + " error => " + temp);
+                wordsDTO.error(temp, wordsRepository.similarityWords(temp));
+                wordsDTOList.add(wordsDTO);
+            }
 
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(resultDTO.success(wordsDTOList));
+    }
 
     @Override
     public ResponseEntity<ResultDTO> getAllWords() {
@@ -213,4 +197,6 @@ public class WordsService implements IWordsService {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(resultDTO.error(e));
         }
     }
+
+
 }
