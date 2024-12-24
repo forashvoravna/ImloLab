@@ -25,13 +25,6 @@ public class Words {
 
     @Column(nullable = false)
     String description;
-<<<<<<< HEAD
-=======
-    @Column(nullable = false, name = "word_lotin")
-    String wordLotin;
-    @Column(nullable = false, name = "description_lotin")
-    String descriptionLotin;
->>>>>>> 33bfd4726310bd95e71ad3cdcacab6510ab256c6
 
     @NotBlank(message = "word_lotin field must not be blank")
     @Column(nullable = false, unique = true, name = "word_lotin")
