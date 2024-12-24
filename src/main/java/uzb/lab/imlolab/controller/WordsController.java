@@ -4,10 +4,16 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+<<<<<<< HEAD
 import uzb.lab.imlolab.dto.ResultDTO;
 import uzb.lab.imlolab.payload.TextPayload;
 import uzb.lab.imlolab.payload.WordsPayload;
 import uzb.lab.imlolab.service.implement.WordsService;
+=======
+import uzb.lab.imlolab.service.WordsService;
+>>>>>>> 33bfd4726310bd95e71ad3cdcacab6510ab256c6
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @RequestMapping("/imlo/words")
@@ -22,6 +28,7 @@ public class WordsController {
         return wordsService.checkTextForWords(textPayload);
     }
 
+<<<<<<< HEAD
     @GetMapping("/")
     public ResponseEntity<ResultDTO> getAllWords() {
         return wordsService.getAllWords();
@@ -67,4 +74,10 @@ public class WordsController {
         return wordsService.deleteByWord(word);
     }
 
+=======
+    @GetMapping("/incorrect")
+    public List<String> getIncorrect(@RequestParam String text){
+        return wordsService.findIncorrectWords(text);
+    }
+>>>>>>> 33bfd4726310bd95e71ad3cdcacab6510ab256c6
 }

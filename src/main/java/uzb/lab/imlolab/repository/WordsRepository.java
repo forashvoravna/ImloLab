@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import uzb.lab.imlolab.dto.SimilarityDTO;
 import uzb.lab.imlolab.entity.Words;
 
+<<<<<<< HEAD
 import java.util.List;
 import java.util.Map;
 
@@ -38,4 +39,9 @@ public interface WordsRepository extends JpaRepository<Words, Long> {
     boolean existsByWord(String word);
 
     boolean existsByWordLotin(String wordLotin);
+=======
+public interface WordsRepository extends JpaRepository<Words, Integer> {
+
+    boolean existsByWordLotin(String l);
+>>>>>>> 33bfd4726310bd95e71ad3cdcacab6510ab256c6
 }
